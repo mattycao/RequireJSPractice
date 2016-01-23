@@ -1,34 +1,39 @@
 /**
  * Created by caoyangkaka on 1/22/16.
  */
-define(['jquery'], function($) {
+define(['jquery'], function ($) {
     function Window() {
         this.cfg = {
             height: 500,
-            width: 300
+            width: 300,
+            content: '',
+            handler: null
         }
     }
+
     Window.prototype = {
-        alert: function (content, handler, cfg){
+        alert: function (cfg) {
+            var CFG = $.extend(this.cfg, cfg);
             var box = $('<div class="window_boundingBox"></div>');
             box.appendTo("body");
-            box.html(content);
+            box.html(CFG.content);
             var $btn = $('<input type="button" value="X">');
             $btn.appendTo(box);
-            $btn.click(function() {
-                handler && handler(); // cool here
+            $btn.click(function () {
+                CFG.handler && CFG.handler(); // cool here
                 box.remove();
             });
-            $.extend(this.cfg, cfg);
             box.css({
-                width: this.cfg.width + 'px',
-                height: this.cfg.height + 'px',
-                left: (this.cfg.x || (window.innerWidth - this.cfg.width)/2) + 'px',
-                top: (this.cfg.y || (window.innerHeight - this.cfg.height)/2) + 'px'
+                width: CFG.width + 'px',
+                height: CFG.height + 'px',
+                left: (CFG.x || (window.innerWidth - CFG.width) / 2) + 'px',
+                top: (CFG.y || (window.innerHeight - CFG.height) / 2) + 'px'
             })
         },
-        prompt: function (){},
-        confirm: function (){}
+        prompt: function () {
+        },
+        confirm: function () {
+        }
     }
     return {
         Window: Window
