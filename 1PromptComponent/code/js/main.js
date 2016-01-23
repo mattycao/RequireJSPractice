@@ -10,6 +10,10 @@ require(['jquery', 'Window'], function($, w) {
     $('#a').click(function() {
         new w.Window().alert('Welcome!', function() {
             //alert('You click the close Button');
+        }, {
+            width: 300,
+            height: 150,
+            y: 50
         });
     });
 });
